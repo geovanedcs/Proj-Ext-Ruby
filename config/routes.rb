@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :notepads
+  resources :carts
+  resources :products
   get 'home/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Notepads</h1>
+
+<div id="notepads">
+  <% @notepads.each do |notepad| %>
+    <%= render notepad %>
+    <p>
+      <%= link_to "Show this notepad", [, notepad] %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New notepad", new__notepad_path %>

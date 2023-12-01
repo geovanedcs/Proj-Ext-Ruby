@@ -1,0 +1,17 @@
+<%= form_with(model: [, notepad]) do |form| %>
+  <% if notepad.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(notepad.errors.count, "error") %> prohibited this notepad from being saved:</h2>
+
+      <ul>
+        <% notepad.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
