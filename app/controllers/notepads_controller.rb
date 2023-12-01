@@ -25,7 +25,7 @@ class NotepadsController < ApplicationController
 
     respond_to do |format|
       if @notepad.save
-        format.html { redirect_to _notepad_url(@notepad), notice: "Notepad was successfully created." }
+        format.html { redirect_to notepad_url(@notepad), notice: "Notepad was successfully created." }
         format.json { render :show, status: :created, location: @notepad }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class NotepadsController < ApplicationController
     @notepad.destroy
 
     respond_to do |format|
-      format.html { redirect_to _notepads_url, notice: "Notepad was successfully destroyed." }
+      format.html { redirect_to notepads_url, notice: "Notepad was successfully destroyed." }
       format.json { head :no_content }
     end
   end

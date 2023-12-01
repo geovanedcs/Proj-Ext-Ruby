@@ -6,9 +6,9 @@
   <% @notepads.each do |notepad| %>
     <%= render notepad %>
     <p>
-      <%= link_to "Show this notepad", [, notepad] %>
+      <%= link_to "Show this notepad", [notepad] %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New notepad", new__notepad_path %>
+<%= link_to "New notepad", new_notepad_path %>

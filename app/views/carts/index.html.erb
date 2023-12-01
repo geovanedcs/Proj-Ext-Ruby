@@ -6,9 +6,9 @@
   <% @carts.each do |cart| %>
     <%= render cart %>
     <p>
-      <%= link_to "Show this cart", [, cart] %>
+      <%= link_to "Show this cart", [@notepad, cart] %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New cart", new__cart_path %>
+<%= link_to "New cart", new_notepad_cart_path %>
