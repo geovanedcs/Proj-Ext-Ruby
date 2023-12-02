@@ -1,10 +1,10 @@
 <h1>Editing product</h1>
 
-<%= render "form", product: @product %>
+<%= render "form",notepad:@notepad, cart:@cart, product: @product %>
 
 <br>
 
 <div>
-  <%= link_to "Show this product", [, @product] %> |
-  <%= link_to "Back to products", _products_path %>
+  <%= link_to "Show this product", [@notepad, @cart, @product] %> |
+  <%= link_to "Back to products", notepad_cart_products_path %>
 </div>

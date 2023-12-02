@@ -6,17 +6,17 @@
 <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">Notepad</th>
-        <th scope="col">Purchase Date</th>
+        <th scope="col">Cart</th>
+        <th scope="col">Status</th>
         <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
       <% @carts.each do |cart| %>
         <tr>
-            <td><%= carts.name %></td>
-            <td><%= carts.status %></td>
-            <td style="text-align: right;"><%= button_to "Show this notepad", [notepad], method: :get, class: 'btn btn-outline-primary' %></td>
+            <td><%= cart.name %></td>
+            <td><%= cart.status %></td>
+            <td style="text-align: right;"><%= button_to "Show this cart", [@notepad], method: :get, class: 'btn btn-outline-primary' %></td>
           </tr>
   <% end %>
     </tbody>

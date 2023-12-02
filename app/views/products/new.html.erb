@@ -1,9 +1,9 @@
 <h1>New product</h1>
 
-<%= render "form", product: @product %>
+<%= render "form",notepad: @notepad, cart: @cart, product: @product %>
 
 <br>
 
 <div>
-  <%= link_to "Back to products", _products_path %>
+  <%= link_to "Back to products", notepad_cart_products_url %>
 </div>

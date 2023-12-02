@@ -1,9 +1,11 @@
 class ProductsController < ApplicationController
+  before_action :set_notepad
+  before_action :set_cart
   before_action :set_product, only: %i[ show edit update destroy ]
 
   # GET /products or /products.json
   def index
-    @products = Product.all
+    @products = @cart.products.all
   end
 
   # GET /products/1 or /products/1.json
@@ -12,7 +14,7 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
-    @product = Product.new
+    @product = @cart.products.new
   end
 
   # GET /products/1/edit
@@ -21,11 +23,11 @@ class ProductsController < ApplicationController
 
   # POST /products or /products.json
   def create
-    @product = Product.new(product_params)
+    @product = @cart.products.new(product_params)
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to _product_url(@product), notice: "Product was successfully created." }
+        format.html { redirect_to notepad_cart_products_url(@product), notice: "Product was successfully created." }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +40,7 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to _product_url(@product), notice: "Product was successfully updated." }
+        format.html { redirect_to notepad_cart_product_url(@product), notice: "Product was successfully updated." }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +54,27 @@ class ProductsController < ApplicationController
     @product.destroy
 
     respond_to do |format|
-      format.html { redirect_to _products_url, notice: "Product was successfully destroyed." }
+      format.html { redirect_to notepad_cart_products_url, notice: "Product was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_notepad
+      @notepad = Notepad.find params[:notepad_id]
+    end
+
+    def set_cart
+      @cart = @notepad.carts.find(params[:cart_id])
+    end
+
     def set_product
-      @product = Product.find(params[:id])
+      @product = @cart.products.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.fetch(:product, {})
+      params.require(:product).permit(:name, :amount, :status)
     end
 end

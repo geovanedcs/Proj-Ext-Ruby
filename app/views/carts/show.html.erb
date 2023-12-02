@@ -1,10 +1,70 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @cart %>
-<%= render @cart.products.map(&:name) %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Status</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+    <tbody>
+        <tr>
+          <td><%= @cart.name %></td>
+          <td><%= @cart.status %></td>
+          <td>
 
+          <div class="container text-end">
+              <div class="row" >
+                <div class="col">
+                <%= button_to "Edit this cart", edit_notepad_cart_path(@notepad, @cart), method: :get, class: 'btn btn-warning', style: 'width: 200px;'  %>
+                </div>
+                <div class="col">
+                <%= button_to "Back to carts", notepad_carts_path, method: :get, class: 'btn btn-primary', style: 'width: 200px;' %>
+                </div>
+                <div class="col">
+                <%= button_to "Destroy this cart", [@notepad, @cart], method: :delete, class: 'btn btn-danger', style: 'width: 200px;' %>
+                </div>
+                <div class="col">
+                <%= button_to "Confirm Cart", shop_notepad_cart_path(@notepad, @cart), method: :put, class: 'btn btn-success', style: 'width: 200px;' %>
+              </div>
+           </div>
+          </td>
+        </tr>
+    </tbody>
+</table>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Product</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Status</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cart.products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= product.amount %></td>
+        <td><%= product.status %></td>
+        <td>
+          <%= link_to "Edit", edit_notepad_cart_product_path(@notepad, @cart) %><i class="fa-solid fa-pen-to-square"></i>
+          <%= button_to "Delete", [@notepad, @cart], method: :_destroy %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <div>
-  <%= link_to "Edit this cart", edit_notepad_cart_path(@notepad, @cart) %>
+  <%= link_to "Add a product", new_notepad_cart_product_path(@notepad, @cart) %>
+</div>
+
+<div class="container text-end">
+
+  <%= link_to edit_notepad_cart_path(@notepad, @cart) do %>
+    <i class="fa-regular fa-pen-to-square"></i>
+  <% end %>
   <%= link_to "Back to carts", notepad_carts_path %>
 
   <%= button_to "Destroy this cart", [@notepad, @cart], method: :delete %>
