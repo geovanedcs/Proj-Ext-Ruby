@@ -65,6 +65,6 @@ class NotepadsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def notepad_params
-      params.fetch(:notepad, {})
+      params.require(:notepad).permit(:name, :purchase_date)
     end
 end

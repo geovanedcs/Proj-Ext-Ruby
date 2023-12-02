@@ -13,7 +13,7 @@ class CartsController < ApplicationController
 
   # GET /carts/new
   def new
-    @cart = Cart.new
+    @cart = @notepad.cart.new
   end
 
   # GET /carts/1/edit
