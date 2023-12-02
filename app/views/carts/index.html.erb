@@ -3,12 +3,24 @@
 <h1>Carts</h1>
 
 <div id="carts">
-  <% @carts.each do |cart| %>
-    <%= render cart %>
-    <p>
-      <%= link_to "Show this cart", [@notepad, cart] %>
-    </p>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Notepad</th>
+        <th scope="col">Purchase Date</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @carts.each do |cart| %>
+        <tr>
+            <td><%= carts.name %></td>
+            <td><%= carts.status %></td>
+            <td style="text-align: right;"><%= button_to "Show this notepad", [notepad], method: :get, class: 'btn btn-outline-primary' %></td>
+          </tr>
   <% end %>
+    </tbody>
+</table>
+<%= button_to "New Cart", new_notepad_cart_path, method: :get, class: 'btn btn-success', style: 'float: right;' %>
 </div>
 
-<%= link_to "New cart", new_notepad_cart_path %>

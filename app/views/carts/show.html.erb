@@ -1,10 +1,11 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @cart %>
+<%= render @cart.products.map(&:name) %>
 
 <div>
-  <%= link_to "Edit this cart", edit_notepad_cart_path(@cart) %> |
-  <%= link_to "Back to carts", notepads_carts_path %>
+  <%= link_to "Edit this cart", edit_notepad_cart_path(@notepad, @cart) %>
+  <%= link_to "Back to carts", notepad_carts_path %>
 
   <%= button_to "Destroy this cart", [@notepad, @cart], method: :delete %>
 </div>

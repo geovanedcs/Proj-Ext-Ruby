@@ -1,10 +1,10 @@
 class CartsController < ApplicationController
-  before_action :set_notepads
-  before_action :set_cart, only: %i[ show edit update destroy ]
+  before_action :set_notepad
+  before_action :set_cart, only: %i[ show edit update shop destroy ]
 
   # GET /carts or /carts.json
   def index
-    @carts = @notepads.carts.all
+    @carts = @notepad.carts.all
   end
 
   # GET /carts/1 or /carts/1.json
@@ -13,7 +13,8 @@ class CartsController < ApplicationController
 
   # GET /carts/new
   def new
-    @cart = @notepad.cart.new
+    @cart = @notepad.carts.new
+    4.times {@cart.products.build}
   end
 
   # GET /carts/1/edit
@@ -22,7 +23,7 @@ class CartsController < ApplicationController
 
   # POST /carts or /carts.json
   def create
-    @cart = @notepads.cart.new(cart_params)
+    @cart = @notepad.carts.new(cart_params)
 
     respond_to do |format|
       if @cart.save
@@ -38,7 +39,7 @@ class CartsController < ApplicationController
   # PATCH/PUT /carts/1 or /carts/1.json
   def update
     respond_to do |format|
-      if @cart.update(cart_params)
+      if @notepad.carts.update(cart_params)
         format.html { redirect_to notepad_cart_url(@notepad, @cart), notice: "Cart was successfully updated." }
         format.json { render :show, status: :ok, location: @cart }
       else
@@ -46,6 +47,11 @@ class CartsController < ApplicationController
         format.json { render json: @cart.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def shop
+    @cart.products.update_all(:status => true)
+  
   end
 
   # DELETE /carts/1 or /carts/1.json
@@ -60,15 +66,15 @@ class CartsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_notepads
-      @notepads = Notepad.find(params[:notepad_id])
+    def set_notepad
+      @notepad = Notepad.find params[:notepad_id]
     end
     def set_cart
-      @cart = Cart.find(params[:id])
+      @cart = @notepad.carts.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def cart_params
-      params.fetch(:cart, {})
+      params.require(:cart).permit(:name, :status, products_attributes: [:id, :name, :amount, :status, :_destroy])
     end
 end

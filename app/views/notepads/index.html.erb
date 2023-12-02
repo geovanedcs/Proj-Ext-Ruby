@@ -1,14 +1,25 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Notepads</h1>
-
 <div id="notepads">
-  <% @notepads.each do |notepad| %>
-    <%= render notepad %>
-    <p>
-      <%= link_to "Show this notepad", [notepad] %>
-    </p>
-  <% end %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Notepad</th>
+        <th scope="col">Purchase Date</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+      <tbody>
+        <% @notepads.each do |notepad| %>
+          <tr>
+            <td><%= notepad.name %></td>
+            <td><%= notepad.purchase_date %></td>
+            <td style="text-align: right;"><%= button_to "Show this notepad", [notepad], method: :get, class: 'btn btn-outline-primary' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+  </table>
+        <%= button_to "New notepad", new_notepad_path, method: :get, class: 'btn btn-success', style: 'float: right;' %>
 </div>
-
-<%= link_to "New notepad", new_notepad_path %>
+      
+      

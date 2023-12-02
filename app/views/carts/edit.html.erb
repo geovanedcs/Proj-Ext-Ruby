@@ -1,10 +1,10 @@
 <h1>Editing cart</h1>
 
-<%= render "form", cart: @cart %>
+<%= render "form", cart: @cart, notepad: @notepad %>
 
 <br>
 
 <div>
   <%= link_to "Show this cart", [@notepad, @cart] %> |
-  <%= link_to "Back to carts", notepads_carts_path %>
+  <%= link_to "Back to carts", notepad_carts_path %>
 </div>

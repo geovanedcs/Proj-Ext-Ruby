@@ -10,12 +10,15 @@
       </ul>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-    <%= form.label :purchase_date %>
-    <%= form.date_field :purchase_date %>
-    <%= form.submit %>
+  
+  <div class="col-3">
+    <form>
+      <%= form.label :name, class: 'form-label' %>
+      <%= form.text_field :name , class: 'form-control'%>
+      <%= form.label :purchase_date, class: 'form-label' %>
+      <%= form.date_field :purchase_date, class: 'form-control' %>
+      <div><p></p></div>
+      <%= form.submit "Add Notepad", class: 'btn btn-outline-success'%>
+    </form>
   </div>
 <% end %>
